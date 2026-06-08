@@ -1,0 +1,22 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Proprietary data (not distributed)
+data/
+*.pkl
+*.npy
+*.jsonl
+aligned_300_frames.jsonl
+
+# Large model outputs
+*.keras
+
+# OS
+.DS_Store
+Thumbs.db
