@@ -29,18 +29,18 @@ XGBoost with engineered features is the best-performing model overall.
 
 Features were engineered in three rounds:
 
-**Original features**: Camera-level statistics — tear_ratio, defect_ratio, rollenwechsel_count, rollenwechsel_in_last_50/100, first/last defect position, longest no_defect run, dominant label entropy, Kantenfehler count/ratio, defect burst acceleration, defect agreement between cameras, etc.
+**Original features**: Camera-level statistics > tear_ratio, defect_ratio, rollenwechsel_count, rollenwechsel_in_last_50/100, first/last defect position, longest no_defect run, dominant label entropy, Kantenfehler count/ratio, defect burst acceleration, defect agreement between cameras, etc.
 
 **v2 features**: Sequence-derived signals — first_problem_pos_any, k_present_early, k_asymmetry, cam problem_span, defect bursts in first half, k_escalation, max_pre_tear_density
 
-**v3 features**: Operational metadata — grade_encoded, printer_encoded (machine ID), web_width_mm, supplier_encoded, detector, month
+**v3 features**: Operational metadata> grade_encoded, printer_encoded (machine ID), web_width_mm, supplier_encoded, detector, month
 
 The top XGBoost features (by gain importance):
-1. `cam1_tear_ratio` — fraction of cam1 frames classified as tear
-2. `grade_encoded` — paper grade (not visible in event text)
-3. `printer_encoded` — which printing unit (not in event text)
-4. `first_problem_pos_any` — relative position of first defect/tear in sequence
-5. `pap_len` — paper roll length in metres
+1. `cam1_tear_ratio` > fraction of cam1 frames classified as tear
+2. `grade_encoded` > paper grade (not visible in event text)
+3. `printer_encoded` > which printing unit (not in event text)
+4. `first_problem_pos_any` > relative position of first defect/tear in sequence
+5. `pap_len` > paper roll length in metres
 
 ## LLM Experiment Design
 
