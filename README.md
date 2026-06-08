@@ -1,6 +1,6 @@
 # GPT-4o Web Break Classification: Reasoning Failure Under Quantitative Hint Injection
 
-**MSc Thesis Preliminary Work — Direct Precursor to SOAR I-1 Research**
+**MSc Thesis Preliminary Work**
 
 ---
 
@@ -12,7 +12,7 @@ The central finding is a paradox:
 
 > **Injecting correct, XGBoost-learned quantitative decision rules into the prompt increased GPT-4o's overall accuracy by 7 percentage points, while collapsing its recall on the minority class (paper breaks) by 61%.**
 
-This paradox — improved surface accuracy, degraded reasoning quality — is the behavioral signature that SOAR I-1 proposes to study at the mechanistic level via sparse autoencoder (SAE) and activation analysis.
+This paradox improved surface accuracy, degraded reasoning quality is the behavioral signature that needs to be studied.
 
 ---
 
@@ -162,13 +162,14 @@ Of XGBoost's top 20 features:
 - The top feature (`cam1_tear_ratio`) requires ratio computation from the sequence — not observable directly
 - Ranks 2–3 (`grade_encoded`, `printer_encoded`) are not in the event text at all
 
-This means GPT-4o is working with a structurally incomplete view of the feature space — it cannot, in principle, replicate XGBoost's decision boundary even with perfect threshold execution.
+This means GPT-4o is working with a structurally incomplete view of the feature space it cannot, in principle, replicate XGBoost's decision boundary even with perfect threshold execution.
 
 ---
 
 ## Thesis Context
 
-**Title**: Automated Web Break Cause Classification Using Time-Series and LLM Approaches  
+**Title**: Automated Web Break Cause Classification Using Time-Series and LLM Approaches 
+**Graded**: 1,1
 **Degree**: MSc, Bertelsmann SE & Co. KGaA  
 **Dataset**: 14,073 labelled break events, 9 model families evaluated  
 **XGBoost baseline**: Mean test AUC 0.86 (3-fold stratified CV)  
@@ -178,16 +179,5 @@ This means GPT-4o is working with a structurally incomplete view of the feature 
 
 ---
 
-## What's Missing (Roadmap for I-1)
-
-This work establishes the behavioral baseline. The I-1 project extends it with:
-
-1. **Open-weight model replication**: Replicate v3/v5 with Llama-3 70B or Qwen-2.5 to enable activation access
-2. **SAE feature analysis**: Identify which SAE features are active on `shortcut_visual_pattern` vs `threshold_misexecution` inputs
-3. **Activation probe**: Train a linear probe on residual stream activations to predict `failure_type`
-4. **Subtly hinted condition**: Add a v4 condition with qualitative domain guidance (no thresholds) as the middle point in the clean→subtly→misleadingly hinted progression
-5. **Scale-up**: Extend the labeled dataset from 100 to ~500 events to improve statistical power
-
----
 
 *Data: proprietary (Bertelsmann SE & Co. KGaA). Code and results: research use.*
