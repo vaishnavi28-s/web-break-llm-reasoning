@@ -1,7 +1,5 @@
 # GPT-4o Web Break Classification: Reasoning Failure Under Quantitative Hint Injection
 
-**MSc Thesis Preliminary Work**
-
 ---
 
 ## Overview
