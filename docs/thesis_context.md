@@ -97,4 +97,4 @@ This work motivates several interpretability questions:
 
 **Feature circuits for shortcut reasoning**: In v3, the shortcut pattern ("long clean run → paper") might correspond to identifiable attention heads that attend to run-length counts and co-activate with the "paper" output token. Identifying and ablating these circuits would test whether they are causally responsible for the shortcut errors.
 
-These are the empirical questions that connect this thesis work to the SOAR I-1 research agenda.
+These are the empirical questions that motivate the next phase of interpretability analysis.

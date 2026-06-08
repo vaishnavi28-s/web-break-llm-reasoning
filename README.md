@@ -26,7 +26,7 @@ This paradox improved surface accuracy, degraded reasoning quality is the behavi
 
 ### Conditions
 
-| Version | Condition (I-1 Analogy) | Prompt Design | Paper Recall | Paper F1 | Overall Acc |
+| Version | Condition | Prompt Design | Paper Recall | Paper F1 | Overall Acc |
 |---------|------------------------|---------------|:------------:|:--------:|:-----------:|
 | **v3** | Clean hint | 10 few-shot examples (5 per class), semantic descriptions only | **0.46** | **0.22** | 0.64 |
 | **v5** | Misleadingly hinted | 24 few-shot examples + exact XGBoost decision rules with threshold values | **0.18** | **0.12** | 0.71 |
@@ -56,25 +56,25 @@ The result is a model that writes structured, threshold-citing reasoning while m
 
 ---
 
-## Connection to SOAR I-1
+## Interpretability Research Extensions
 
-The I-1 project studies whether open-weight reasoning models arrive at correct answers for wrong reasons, and whether interpretability tools can detect that failure mode. This work provides:
+This work raises questions about LLM reasoning that behavioral metrics alone cannot answer:
 
-### 1. A labeled behavioral dataset
+### 1. Labeled behavioral dataset
 
 `results/labeled_response_dataset.csv` contains each response annotated with:
 - `event_id`, `true_label`, `predicted_label`, `prompt_condition`, `reasoning`
 - `failure_type`: `correct` | `shortcut_visual_pattern` | `majority_class_bias` | `threshold_misexecution` | `correct_threshold_use`
 
-This is the seed for the I-1 "labeled response dataset" deliverable — a set of inputs where we know not just the correctness of the output, but the *type* of reasoning failure.
+This dataset captures not just prediction correctness but the *type* of reasoning failure, enabling mechanistic analysis beyond accuracy metrics.
 
-### 2. A matched clean / misleadingly-hinted condition pair
+### 2. A matched clean / rule-injected condition pair
 
-v3 and v5 are the I-1 condition pair: the same 100 events, same model, same output format, but different internal reasoning pathways. The surface output changes (different error distribution, different confidence levels), but for many events the final label is the same — meaning behavioral accuracy alone cannot detect the reasoning failure.
+v3 and v5 are a controlled pair: the same 100 events, same model, same output format, but different internal reasoning pathways. For many events the final label is the same across conditions — meaning behavioral accuracy alone cannot detect the reasoning failure.
 
 ### 3. Candidate failure signatures for activation analysis
 
-The `shortcut_visual_pattern` events in v3 and `threshold_misexecution` events in v5 are candidate inputs for the SAE analysis. Specifically:
+The `shortcut_visual_pattern` events in v3 and `threshold_misexecution` events in v5 are candidate inputs for mechanistic analysis. Specifically:
 
 | Analysis Target | Hypothesis |
 |----------------|------------|
@@ -82,7 +82,7 @@ The `shortcut_visual_pattern` events in v3 and `threshold_misexecution` events i
 | Activations at threshold-citation tokens in v5 | If the model is executing thresholds, inequality-evaluation features should activate; if pattern-matching, label-association features should dominate |
 | Attention to few-shot paper examples in v5 vs v3 | v5 paper recall collapse may correlate with reduced attention weight on the few-shot paper examples (drowned out by the rule text) |
 
-### 4. Open questions the project cannot currently answer
+### 4. Open questions
 
 - Do internal representations distinguish a model that *knows* a threshold from one that *mimics* citing it?
 - Is the paper-recall collapse in v5 driven by a change in the decision boundary in representation space, or by a retrieval failure (rule text suppresses paper example retrieval)?
