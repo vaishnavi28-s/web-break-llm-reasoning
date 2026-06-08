@@ -1,5 +1,5 @@
 ==============================================================================
-EXPERIMENT: v3 — Baseline Few-Shot (Clean Condition)
+EXPERIMENT: v3 Baseline Few-Shot (Clean Condition)
 MODEL: gpt-4o  |  temperature=0.01  |  10 few-shot examples (5 machine + 5 paper)
 ==============================================================================
 
