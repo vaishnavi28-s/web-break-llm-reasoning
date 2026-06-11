@@ -46,11 +46,11 @@ pap_len > 25000 m        → paper
 
 The model **cites these numbers** in almost every reasoning trace. Accuracy on the majority class improves because the thresholds happen to be correct and the majority class is large. But paper recall collapses from 0.46 to 0.18. Why? The model **cannot reliably execute threshold comparisons**:
 
-1. `cam1_tear_ratio` (XGBoost rank #1) requires computing a ratio from the frame sequence — an operation GPT-4o cannot perform. It is told the threshold but cannot measure the operand.
+1. `cam1_tear_ratio` (XGBoost rank #1) requires computing a ratio from the frame sequence an operation GPT-4o cannot perform. It is told the threshold but cannot measure the operand.
 2. Grammage and paper length are visible in the metadata and easy to cite. The model over-weights these convenient scalar signals (XGBoost ranks 20 and 5) while ignoring the harder-to-compute ratio features.
-3. XGBoost's ranks 2–3 (`grade_encoded`, `printer_encoded`) are completely absent from the event text — the model never had access to them in either condition.
+3. XGBoost's ranks 2–3 (`grade_encoded`, `printer_encoded`) are completely absent from the event text the model never had access to them in either condition.
 
-The result is a model that writes structured, threshold-citing reasoning while making systematically incorrect predictions on the minority class — **correct-sounding reasoning, wrong answers, for wrong reasons**.
+The result is a model that writes structured, threshold-citing reasoning while making systematically incorrect predictions on the minority class **correct-sounding reasoning, wrong answers, for wrong reasons**.
 
 ---
 
@@ -68,7 +68,7 @@ This dataset captures not just prediction correctness but the *type* of reasonin
 
 ### 2. A matched clean / rule-injected condition pair
 
-v3 and v5 are a controlled pair: the same 100 events, same model, same output format, but different internal reasoning pathways. For many events the final label is the same across conditions — meaning behavioral accuracy alone cannot detect the reasoning failure.
+v3 and v5 are a controlled pair: the same 100 events, same model, same output format, but different internal reasoning pathways. For many events the final label is the same across conditions meaning behavioral accuracy alone cannot detect the reasoning failure.
 
 ### 3. Candidate failure signatures for activation analysis
 
@@ -157,7 +157,7 @@ These surface signals have **low-to-moderate XGBoost importance** (`cam1_longest
 
 Of XGBoost's top 20 features:
 - Only **4 are directly visible** in the event text: `pap_len`, `cam1_rollenwechsel_count`, `speed`, `grammage`
-- The top feature (`cam1_tear_ratio`) requires ratio computation from the sequence — not observable directly
+- The top feature (`cam1_tear_ratio`) requires ratio computation from the sequence, not observable directly
 - Ranks 2–3 (`grade_encoded`, `printer_encoded`) are not in the event text at all
 
 This means GPT-4o is working with a structurally incomplete view of the feature space it cannot, in principle, replicate XGBoost's decision boundary even with perfect threshold execution.
@@ -173,7 +173,7 @@ This means GPT-4o is working with a structurally incomplete view of the feature 
 **XGBoost baseline**: Mean test AUC 0.86 (3-fold stratified CV)  
 **GPT-4o v3**: paper recall 0.46, F1 0.22 (100-event test, 5-shot per class)  
 **GPT-4o v5**: paper recall 0.18, F1 0.12 (100-event test, 12-shot per class + XGBoost rules)  
-**Key conclusion**: Providing exact decision rules worsened performance, isolating the failure as architectural — the model cannot execute quantitative threshold logic regardless of information provided.
+**Key conclusion**: Providing exact decision rules worsened performance, isolating the failure as architectural which the model cannot execute quantitative threshold logic regardless of information provided.
 
 ---
 
